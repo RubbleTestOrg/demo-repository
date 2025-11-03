@@ -1,0 +1,1 @@
+Here are the rules for contributing to this repository
