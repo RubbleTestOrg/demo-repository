@@ -33,7 +33,7 @@ jobs:
           title: "docs: update CHANGELOG.md"
           body: |
             Auto-generated changelog update based on recent commits.
-            
+
             This PR was automatically created by the changelog workflow.
           branch: changelog-update
           delete-branch: true
@@ -43,4 +43,4 @@ jobs:
       - name: Enable auto-merge
         run: gh pr merge --auto --squash changelog-update
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
