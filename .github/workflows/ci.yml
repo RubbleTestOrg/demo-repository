@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: ci-${{ github.ref }}-${{ github.event_name }}
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     permissions:
-      pull-requests: write   # needed for annotations
+      pull-requests: write # needed for annotations
       contents: read
     steps:
       - uses: amannn/action-semantic-pull-request@v6
@@ -42,12 +42,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # IMPORTANT: lint all commits in the PR
+          fetch-depth: 0 # IMPORTANT: lint all commits in the PR
       - uses: wagoid/commitlint-github-action@v6
         with:
           # If you add commitlint.config.js to the repo, point to it:
           configFile: commitlint.config.mjs
           helpURL: https://www.conventionalcommits.org/en/v1.0.0/
+
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    needs: [commitlint, semantic-pr]
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run format:check --if-present || npx prettier --check .
 
   lint:
     name: ESLint
@@ -58,8 +72,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
       - run: npm ci
       - run: npm run lint --if-present || npx eslint . --max-warnings=0
 
@@ -76,8 +90,8 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
