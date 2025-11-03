@@ -11,23 +11,62 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # --- PR Title must follow Conventional Commits ---
+  semantic-pr:
+    name: Semantic PR Title
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    permissions:
+      pull-requests: write   # needed for annotations
+      contents: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Optional config (uncomment to restrict types/scopes):
+        # with:
+        #   types: |
+        #     feat
+        #     fix
+        #     chore
+        #     docs
+        #     refactor
+        #     test
+
+  # --- Commit messages must follow Conventional Commits ---
+  commitlint:
+    name: Commitlint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # IMPORTANT: lint all commits in the PR
+      - uses: wagoid/commitlint-github-action@v6
+        with:
+          # If you add commitlint.config.js to the repo, point to it:
+          configFile: commitlint.config.js
+          helpURL: https://www.conventionalcommits.org/en/v1.0.0/
+
   lint:
     name: ESLint
     runs-on: ubuntu-latest
+    needs: [commitlint, semantic-pr]
     permissions: { contents: read }
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run lint --if-present || npx eslint . --max-warnings=0
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint --if-present || npx eslint . --max-warnings=0
 
   test:
     name: Jest
     runs-on: ubuntu-latest
-    needs: [lint]
+    needs: [lint, commitlint, semantic-pr]
     permissions:
       contents: read
     steps:
@@ -50,11 +89,11 @@ jobs:
   codeql:
     name: CodeQL
     runs-on: ubuntu-latest
-    # Only run CodeQL on repo types GitHub supports for scanning
+    needs: [commitlint, semantic-pr]
     if: ${{ !startsWith(github.repository, 'fork') }}
     permissions:
       contents: read
-      security-events: write    # required for code scanning results
+      security-events: write
       actions: read
     steps:
       - name: Checkout
@@ -64,11 +103,6 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: javascript
-          # queries: security-extended,security-and-quality  # uncomment if you want broader coverage
-
-      # For JS/TS projects, build is usually unnecessary; leave commented unless you need it.
-      # - name: Autobuild
-      #   uses: github/codeql-action/autobuild@v3
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
