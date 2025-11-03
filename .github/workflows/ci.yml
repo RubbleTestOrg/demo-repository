@@ -49,6 +49,20 @@ jobs:
           configFile: commitlint.config.mjs
           helpURL: https://www.conventionalcommits.org/en/v1.0.0/
 
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    needs: [commitlint, semantic-pr]
+    permissions: { contents: read }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run format:check --if-present || npx prettier --check .
+
   lint:
     name: ESLint
     runs-on: ubuntu-latest
