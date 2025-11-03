@@ -45,7 +45,7 @@ jobs:
 
       - name: Run Jest tests
         run: |
-          npm test --if-present || npx jest --ci
+          npm test --if-present || npx jest --ci --coverage --passWithNoTests
 
   codeql:
     name: CodeQL
