@@ -1,9 +1,19 @@
 {
-  "name": "demo-repo",
-  "version": "0.2.0",
-  "description": "A sample package.json",
-  "dependencies": {
-    "@primer/css": "17.0.1"
+  "name": "demo-repository",
+  "version": "1.0.0",
+  "description": "Demo repository for testing Rubble",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RubbleTestOrg/demo-repository.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RubbleTestOrg/demo-repository/issues"
+  },
+  "homepage": "https://github.com/RubbleTestOrg/demo-repository#readme"
 }
