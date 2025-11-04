@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Provides default folder structure for template repository
 - Adds contribution document (#9)
 - Update CHANGELOG.md (#18)
+- Update CHANGELOG.md (#32)
 
 ### Miscellaneous Tasks
 
