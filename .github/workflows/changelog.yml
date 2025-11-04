@@ -4,7 +4,7 @@ on:
   push:
     branches: [development]
     paths-ignore:
-      - 'CHANGELOG.md'
+      - "CHANGELOG.md"
 
 permissions:
   contents: write
