@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - Update CHANGELOG.md (#37)
 - Update CHANGELOG.md (#40)
 - Update CHANGELOG.md (#41)
+- Update CHANGELOG.md (#42)
 
 ### Miscellaneous Tasks
 
