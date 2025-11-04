@@ -3,6 +3,8 @@ name: Generate Changelog
 on:
   push:
     branches: [development]
+    paths-ignore:
+      - 'CHANGELOG.md'
 
 permissions:
   contents: write
