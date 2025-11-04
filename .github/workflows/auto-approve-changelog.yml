@@ -14,6 +14,9 @@ jobs:
       startsWith(github.event.pull_request.title, 'docs:') &&
       contains(github.event.pull_request.title, 'CHANGELOG')
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Generate GitHub App Token
         id: generate-token
         uses: tibdex/github-app-token@v2
