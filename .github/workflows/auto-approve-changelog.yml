@@ -30,8 +30,7 @@ jobs:
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
 
-      - name: Merge PR
-        if: github.event.pull_request.mergeable_state == 'clean' || github.event.pull_request.mergeable_state == 'unstable'
+      - name: Enable Auto-Merge
         run: gh pr merge ${{ github.event.pull_request.number }} --auto --squash
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
