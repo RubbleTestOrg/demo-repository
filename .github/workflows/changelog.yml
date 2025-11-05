@@ -2,7 +2,9 @@ name: Generate Changelog
 
 on:
   push:
-    branches: [main]
+    branches: [development]
+    paths-ignore:
+      - "CHANGELOG.md"
 
 permissions:
   contents: write
@@ -25,7 +27,7 @@ jobs:
           config: cliff.toml
           args: --verbose --output CHANGELOG.md
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
