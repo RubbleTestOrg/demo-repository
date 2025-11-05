@@ -23,7 +23,6 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-          repository: ${{ github.repository }}
 
       - name: Approve PR
         uses: hmarr/auto-approve-action@v4
