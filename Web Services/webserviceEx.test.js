@@ -1,6 +1,6 @@
-const { main } = require('./webserviceEx');
+const { main } = require("./webserviceEx");
 
-describe('webserviceEx', () => {
+describe("webserviceEx", () => {
   let mockVvClient;
   let mockResponse;
 
@@ -13,11 +13,11 @@ describe('webserviceEx', () => {
     };
   });
 
-  it('should execute main function without errors', async () => {
+  it("should execute main function without errors", async () => {
     await expect(main(mockVvClient, mockResponse)).resolves.not.toThrow();
   });
 
-  it('should accept vvClient and response parameters', async () => {
+  it("should accept vvClient and response parameters", async () => {
     const result = await main(mockVvClient, mockResponse);
     expect(result).toBeUndefined();
   });
