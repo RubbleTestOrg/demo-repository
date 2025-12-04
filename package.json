@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "Demo repository for testing Rubble",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "precheck": "npm run format && npm run lint && npm run test"
   },
   "repository": {
     "type": "git",
