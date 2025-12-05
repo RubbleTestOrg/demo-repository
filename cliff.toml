@@ -53,6 +53,7 @@ commit_parsers = [
   { message = "^chore|ci", group = "Miscellaneous Tasks" },
   { body = ".*security", group = "Security" },
   { message = "^revert", group = "Revert" },
+  { author = "dependabot\\[bot\\]", skip = true },
 ]
 # protect breaking changes from being skipped due to matching a skipping commit_parser
 protect_breaking_commits = false

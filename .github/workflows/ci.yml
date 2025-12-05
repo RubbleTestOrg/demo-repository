@@ -15,7 +15,7 @@ jobs:
   semantic-pr:
     name: Semantic PR Title
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
     permissions:
       pull-requests: write # needed for annotations
       contents: read
@@ -37,6 +37,7 @@ jobs:
   commitlint:
     name: Commitlint
     runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
     permissions:
       contents: read
     steps:
