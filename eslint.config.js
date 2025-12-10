@@ -1,4 +1,5 @@
 import noCommentedCode from "eslint-plugin-no-commented-code";
+import localRules from "eslint-plugin-local-rules";
 
 const commonGlobals = {
   console: "readonly",
@@ -24,6 +25,7 @@ const commonRules = {
     },
   ],
   "no-commented-code/no-commented-code": "error",
+  "local-rules/section-order": "error",
 };
 
 export default [
@@ -37,6 +39,7 @@ export default [
     },
     plugins: {
       "no-commented-code": noCommentedCode,
+      "local-rules": localRules,
     },
     rules: commonRules,
   },
@@ -50,6 +53,7 @@ export default [
     },
     plugins: {
       "no-commented-code": noCommentedCode,
+      "local-rules": localRules,
     },
     rules: commonRules,
   },
