@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * Enforce standard banner-style section headers and their order.
@@ -12,10 +12,10 @@
  */
 module.exports = {
   meta: {
-    type: 'layout',
+    type: "layout",
     docs: {
-      description: 'Enforce section order in files',
-      category: 'Stylistic Issues',
+      description: "Enforce section order in files",
+      category: "Stylistic Issues",
     },
     messages: {
       missingSection: 'Missing required section: "{{ name }}"',
@@ -26,16 +26,16 @@ module.exports = {
   create(context) {
     const options = context.options[0] || {};
     const requiredSections = options.sections || [
-      'Response and error handling variables',
-      'Configurable Variables',
-      'Helper Functions',
-      'MAIN CODE',
+      "Response and error handling variables",
+      "Configurable Variables",
+      "Helper Functions",
+      "MAIN CODE",
     ];
 
     const sourceCode = context.getSourceCode();
 
     function normalizeName(raw) {
-      return raw.replace(/\s+/g, ' ').trim().toLowerCase();
+      return raw.replace(/\s+/g, " ").trim().toLowerCase();
     }
 
     return {
@@ -46,15 +46,15 @@ module.exports = {
 
         for (const comment of comments) {
           // Only consider single-line block comments
-          if (comment.type !== 'Block') continue;
+          if (comment.type !== "Block") continue;
 
           const text = comment.value.trim();
 
           // Ignore multi-line blocks like big doc comments
-          if (text.includes('\n')) continue;
+          if (text.includes("\n")) continue;
 
           // Ignore the pure dashed lines like "------"
-          if (/^-{5,}$/.test(text.replace(/\s+/g, ''))) continue;
+          if (/^-{5,}$/.test(text.replace(/\s+/g, ""))) continue;
 
           // At this point, it's a single-line block comment that is not just dashes.
           // We treat it as a potential section title.
@@ -75,13 +75,13 @@ module.exports = {
           const requiredNormName = requiredNorm[i];
 
           const exists = bannerSections.some(
-            (s) => s.normalizedName === requiredNormName
+            (s) => s.normalizedName === requiredNormName,
           );
 
           if (!exists) {
             context.report({
               loc: { line: 1, column: 0 },
-              messageId: 'missingSection',
+              messageId: "missingSection",
               data: { name: requiredName },
             });
           }
@@ -103,7 +103,7 @@ module.exports = {
             const expectedName = requiredSections[expectedIndex];
             context.report({
               node: section.node,
-              messageId: 'wrongOrder',
+              messageId: "wrongOrder",
               data: {
                 current: section.rawName.trim(),
                 expected: expectedName,
