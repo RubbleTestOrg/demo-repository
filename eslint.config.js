@@ -59,6 +59,7 @@ export default [
   // Configuration for Web Services - section-order rule
   {
     files: ["Web Services/**/*.js"],
+    ignores: ["**/*.test.js"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
