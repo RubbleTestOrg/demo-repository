@@ -25,7 +25,6 @@ const commonRules = {
     },
   ],
   "no-commented-code/no-commented-code": "error",
-  "local-rules/section-order": "error",
 };
 
 export default [
@@ -56,5 +55,20 @@ export default [
       "local-rules": localRules,
     },
     rules: commonRules,
+  },
+  // Configuration for Web Services - section-order rule
+  {
+    files: ["Web Services/**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: commonGlobals,
+    },
+    plugins: {
+      "local-rules": localRules,
+    },
+    rules: {
+      "local-rules/section-order": "error",
+    },
   },
 ];
