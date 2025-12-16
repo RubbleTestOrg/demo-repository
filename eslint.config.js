@@ -1,4 +1,5 @@
 import noCommentedCode from "eslint-plugin-no-commented-code";
+import localRules from "eslint-plugin-local-rules";
 
 const commonGlobals = {
   console: "readonly",
@@ -37,6 +38,7 @@ export default [
     },
     plugins: {
       "no-commented-code": noCommentedCode,
+      "local-rules": localRules,
     },
     rules: commonRules,
   },
@@ -50,7 +52,23 @@ export default [
     },
     plugins: {
       "no-commented-code": noCommentedCode,
+      "local-rules": localRules,
     },
     rules: commonRules,
+  },
+  // Configuration for Web Services - section-order rule
+  {
+    files: ["Web Services/**/*.js"],
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: commonGlobals,
+    },
+    plugins: {
+      "local-rules": localRules,
+    },
+    rules: {
+      "local-rules/section-order": "error",
+    },
   },
 ];
