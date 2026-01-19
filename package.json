@@ -27,6 +27,6 @@
     "eslint": "^9.39.2",
     "eslint-plugin-no-commented-code": "^1.0.10",
     "jest": "^30.2.0",
-    "prettier": "^3.7.4"
+    "prettier": "^3.8.0"
   }
 }
