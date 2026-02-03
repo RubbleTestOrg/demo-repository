@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/RubbleTestOrg/demo-repository#readme",
   "devDependencies": {
-    "@commitlint/cli": "^20.2.0",
+    "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.2.0",
     "eslint": "^9.39.2",
     "eslint-plugin-no-commented-code": "^1.0.10",
